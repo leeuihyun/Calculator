@@ -7,12 +7,12 @@ public class Main {
 
     Calculator calculator = new Calculator();
 
-    while(true) {
+    while (true) {
       System.out.println("----계산기 실행----");
 
       System.out.print("첫번째 양의 정수 입력 : ");
       int firstNumber = scan.nextInt();
-      if(firstNumber < 0) {
+      if (firstNumber < 0) {
         System.out.println("첫번째 양의 정수가 0보다 작습니다.(재시작합니다)");
         continue;
       }
@@ -20,7 +20,7 @@ public class Main {
 
       System.out.print("두번째 양의 정수 입력 : ");
       int secondNumber = scan.nextInt();
-      if(secondNumber < 0) {
+      if (secondNumber < 0) {
         System.out.println("두번째 양의 정수가 0보다 작습니다.(재시작합니다)");
         continue;
       }
@@ -30,17 +30,17 @@ public class Main {
       char sign = scan.next().charAt(0);
       calculator.setSign(sign);
 
-      if(!calculator.calculation()) {
+      if (!calculator.calculation()) {
         continue;
       }
 
       calculator.printResult();
 
-      if(!calculator.getListEmpty()) {
+      if (!calculator.getListEmpty()) {
         System.out.print("결과리스트의 처음값을 삭제하시겠습니까? (Y) : ");
         char removeCheckStr = scan.next().charAt(0);
 
-        if(removeCheckStr == 'Y'){
+        if (removeCheckStr == 'Y') {
           calculator.removeFirstResult();
           calculator.printResult();
         }
@@ -49,10 +49,10 @@ public class Main {
       System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) : ");
       String continueCheckStr = scan.next();
 
-      if(continueCheckStr.equals("exit")) {
+      if (continueCheckStr.equals("exit")) {
         calculator.printResult();
         break;
-      }else {
+      } else {
         continue;
       }
     }
