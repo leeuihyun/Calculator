@@ -37,7 +37,7 @@ public class Calculator {
     System.out.println("----결과 출력 종료----");
   }
 
-  public boolean calculation() {
+  public boolean calculate() {
     if (resultList == null) {
       resultList = new ArrayList<>();
     }

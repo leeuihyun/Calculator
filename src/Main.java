@@ -30,7 +30,7 @@ public class Main {
       char sign = scan.next().charAt(0);
       calculator.setSign(sign);
 
-      if (!calculator.calculation()) {
+      if (!calculator.calculate()) {
         continue;
       }
 
@@ -52,8 +52,6 @@ public class Main {
       if (continueCheckStr.equals("exit")) {
         calculator.printResult();
         break;
-      } else {
-        continue;
       }
     }
   }
