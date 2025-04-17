@@ -29,8 +29,13 @@ public class ArithmeticCalculator<T extends Number> {
       case '+' -> firstNumber.doubleValue() + secondNumber.doubleValue();
       case '-' -> firstNumber.doubleValue() - secondNumber.doubleValue();
       case '*' -> firstNumber.doubleValue() * secondNumber.doubleValue();
-      case '/' -> firstNumber.doubleValue() / secondNumber.doubleValue();
-      default -> throw new IllegalStateException("존재하지 않는 연산자입니다.");
+      case '/' -> {
+        if (secondNumber.doubleValue() == 0.0) {
+          throw new Exception("나누기 연산은 두번째 숫자가 0이 될 수 없습니다. 재시작합니다.");
+        }
+        yield firstNumber.doubleValue() / secondNumber.doubleValue();
+      }
+      default -> throw new Exception("존재하지 않는 연산자입니다.");
     };
 
     if (this.firstNumber instanceof Double | this.secondNumber instanceof Double) {
@@ -38,6 +43,11 @@ public class ArithmeticCalculator<T extends Number> {
     } else {
       resultList.add((T) Integer.valueOf((int) result));
     }
+  }
+
+  public void printBigList(T number) {
+    resultList.stream().filter(v -> v.doubleValue() > number.doubleValue())
+        .forEach(System.out::println);
   }
 
   public void printResult() {

@@ -2,6 +2,21 @@ import java.util.Scanner;
 
 public class Main {
 
+  static Number parseNumber(String str) throws Exception {
+    Number number = 0;
+    if (str.contains(".")) {
+      number = Double.parseDouble(str);
+    } else {
+      number = Integer.parseInt(str);
+    }
+
+    if (number.doubleValue() < 0) {
+      throw new Exception("입력하신 숫자가 잘못되었습니다. 0 이상인 정수 또는 실수만 입력해주세요.");
+    }
+
+    return number;
+  }
+
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
     ArithmeticCalculator<Number> arithmeticCalculator = new ArithmeticCalculator<>();
@@ -13,22 +28,23 @@ public class Main {
       String firstNumberStr = scan.next();
       Number firstNumber = 0;
 
-      if (firstNumberStr.contains(".")) {
-        firstNumber = Double.parseDouble(firstNumberStr);
-      } else {
-        firstNumber = Integer.parseInt(firstNumberStr);
+      try {
+        firstNumber = parseNumber(firstNumberStr);
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+        continue;
       }
-
       arithmeticCalculator.setFirstNumber(firstNumber);
 
       System.out.print("두번째 양의 정수 입력 : ");
       String secondNumberStr = scan.next();
       Number secondNumber = 0;
 
-      if (secondNumberStr.contains(".")) {
-        secondNumber = Double.parseDouble(secondNumberStr);
-      } else {
-        secondNumber = Integer.parseInt(secondNumberStr);
+      try {
+        secondNumber = parseNumber(secondNumberStr);
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+        continue;
       }
 
       arithmeticCalculator.setSecondNumber(secondNumber);
@@ -45,9 +61,23 @@ public class Main {
         arithmeticCalculator.calculate();
       } catch (Exception e) {
         System.out.println(e);
+        continue;
       }
 
       arithmeticCalculator.printResult();
+
+      System.out.print("입력받은 값보다 큰 결과값 들을 출력하겠습니다. 값을 입력하세요 : ");
+      String standardNumberStr = scan.next();
+      Number standardNumber = 0;
+
+      try {
+        standardNumber = parseNumber(standardNumberStr);
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+        continue;
+      }
+
+      arithmeticCalculator.printBigList(standardNumber);
 
       System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) : ");
       String continueCheckStr = scan.next();
