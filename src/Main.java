@@ -1,16 +1,13 @@
-import java.util.Scanner;
-
 public class Main {
 
   public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
     ArithmeticCalculator<Double> arithmeticCalculator = new ArithmeticCalculator<>();
+    Display<Double> display = new Display<>();
 
     while (true) {
-      System.out.println("----계산기 실행----");
+      display.printStart();
 
-      System.out.print("첫번째 양의 정수 입력 : ");
-      String firstNumberStr = scan.next();
+      String firstNumberStr = display.inputStr("첫번째 양의 정수 입력 : ");
       double firstNumber;
 
       try {
@@ -21,8 +18,7 @@ public class Main {
       }
       arithmeticCalculator.setFirstNumber(firstNumber);
 
-      System.out.print("두번째 양의 정수 입력 : ");
-      String secondNumberStr = scan.next();
+      String secondNumberStr = display.inputStr("두번째 양의 정수 입력 : ");
       double secondNumber;
 
       try {
@@ -34,8 +30,7 @@ public class Main {
 
       arithmeticCalculator.setSecondNumber(secondNumber);
 
-      System.out.print("사칙연산을 입력하세요 (PLUS, MINUS, MULTIPLY, DIVIDE) : ");
-      String operatorStr = scan.next();
+      String operatorStr = display.inputStr("사칙연산을 입력하세요 (PLUS, MINUS, MULTIPLY, DIVIDE) : ");
       if (!Operator.opContain(operatorStr)) {
         System.out.println("올바르지 않은 사칙연산 문자열입니다. 재시작합니다.");
         continue;
@@ -49,10 +44,9 @@ public class Main {
         continue;
       }
 
-      arithmeticCalculator.printResult();
+      display.printResult(arithmeticCalculator.getResultList());
 
-      System.out.print("입력받은 값보다 큰 결과값 들을 출력하겠습니다. 값을 입력하세요 : ");
-      String standardNumberStr = scan.next();
+      String standardNumberStr = display.inputStr("입력받은 값보다 큰 결과값 들을 출력하겠습니다. 값을 입력하세요 : ");
       double standardNumber;
 
       try {
@@ -62,13 +56,11 @@ public class Main {
         continue;
       }
 
-      arithmeticCalculator.printBigList(standardNumber);
+      display.printBigList(standardNumber, arithmeticCalculator.getResultList());
 
-      System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) : ");
-      String continueCheckStr = scan.next();
-
+      String continueCheckStr = display.inputStr("더 계산하시겠습니까? (exit 입력 시 종료) : ");
       if (continueCheckStr.equals("exit")) {
-        arithmeticCalculator.printResult();
+        display.printResult(arithmeticCalculator.getResultList());
         break;
       }
     }

@@ -20,6 +20,10 @@ public class ArithmeticCalculator<T extends Number> {
     this.sign = sign;
   }
 
+  public List<T> getResultList() {
+    return resultList;
+  }
+
   public void calculate() throws Exception {
     if (resultList == null) {
       resultList = new ArrayList<>();
@@ -41,27 +45,12 @@ public class ArithmeticCalculator<T extends Number> {
     if (isInteger(this.firstNumber) && isInteger(this.secondNumber)) {
       resultList.add((T) Integer.valueOf((int) result));
     } else {
-      double doubleResult = Math.round(result * 100.0) / 100.0;
+      double doubleResult = Math.round(result * 1000.0) / 1000.0;
       resultList.add((T) Double.valueOf(doubleResult));
     }
   }
 
-  public void printBigList(T number) {
-    resultList.stream().filter(v -> v.doubleValue() > number.doubleValue())
-        .forEach(System.out::println);
-  }
-
-  public void printResult() {
-    System.out.println("----결과 출력 시작----");
-    for (Number result : resultList) {
-      System.out.print(result + " ");
-    }
-    System.out.println();
-    System.out.println("----결과 출력 종료----");
-  }
-
   public boolean isInteger(T number) {
-    System.out.println(number.doubleValue() % 1);
     return number.doubleValue() % 1 == 0.0;
   }
 }
