@@ -3,12 +3,7 @@ import java.util.Scanner;
 public class Main {
 
   static Number parseNumber(String str) throws Exception {
-    Number number = 0;
-    if (str.contains(".")) {
-      number = Double.parseDouble(str);
-    } else {
-      number = Integer.parseInt(str);
-    }
+    Number number = str.contains(".") ? Double.parseDouble(str) : Integer.parseInt(str);
 
     if (number.doubleValue() < 0) {
       throw new Exception("입력하신 숫자가 잘못되었습니다. 0 이상인 정수 또는 실수만 입력해주세요.");
@@ -26,7 +21,7 @@ public class Main {
 
       System.out.print("첫번째 양의 정수 입력 : ");
       String firstNumberStr = scan.next();
-      Number firstNumber = 0;
+      Number firstNumber;
 
       try {
         firstNumber = parseNumber(firstNumberStr);
@@ -38,7 +33,7 @@ public class Main {
 
       System.out.print("두번째 양의 정수 입력 : ");
       String secondNumberStr = scan.next();
-      Number secondNumber = 0;
+      Number secondNumber;
 
       try {
         secondNumber = parseNumber(secondNumberStr);
